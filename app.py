@@ -1,4 +1,5 @@
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, json, request, flash 
+from flask import redirect, session, abort
 from flaskext.mysql import MySQL
 from werkzeug import generate_password_hash, check_password_hash
 
@@ -11,6 +12,7 @@ app.config['MYSQL_DATABASE_DB'] = 'BucketList'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
+
 @app.route("/")
 def main():
     return render_template('index.html')
@@ -18,6 +20,25 @@ def main():
 @app.route('/showSignUp')
 def showSignUp():
     return render_template('signup.html')
+
+@app.route('/showLogin')
+def showLogin():
+    return render_template('login.html')
+
+@app.route('/login', methods=['POST'])
+def login():
+	if request.form['inputPassword'] == 'yosrio10' and request.form['inputName'] == 'yosrio':
+		session['logged_in'] = True
+	else:
+		flash('wrong password!')
+	return successLogin()
+
+@app.route('/successLogin')
+def successLogin():
+	if session.get('logged_in'):
+		return render_template('login.html')
+	else:
+    	return render_template('index.html')
 
 @app.route('/signUp', methods=['POST','GET'])
 def signUp():

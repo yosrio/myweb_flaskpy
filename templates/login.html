@@ -8,13 +8,12 @@
     <script language="JavaScript" type="text/javascript" src="../static/js/jquery-3.3.1.js"></script>
     <script>
       $(function() {
-          $('#btnSignUp').click(function() {
+          $('#btnLogin').click(function() {
               $.ajax({
-                  url: '/signUp',
+                  url: '/login',
                   data: $('form').serialize(),
                   type: 'POST',
                   success: function(response) {
-                      alert("Berhasil sign up!");
                       console.log(response);
                   },
                   error: function(error) {
@@ -43,16 +42,14 @@
     </div>
       
     <div class="jumbotron container">
-      <center><h3 class="text-muted">Sign Up Form</h3></center>
+      <center><h3 class="text-muted">Login</h3></center>
       <form class="form-signin">
         <label for="inputName" class="sr-only">Name</label>
         <input type="name" name="inputName" id="inputName" class="form-control" placeholder="Name" required autofocus>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
            
-        <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">Sign up</button>
+        <button id="btnLogin" class="btn btn-lg btn-primary btn-block" type="button">Login</button>
       </form>
     </div>
     <hr>
